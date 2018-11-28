@@ -9,7 +9,7 @@
 		$title = filter_input(INPUT_GET, 'title', FILTER_SANITIZE_URL);
 	}
 
-    $query = "select * from pages where title="."'".$title."'";
+    $query = "select * from sub_pages where title="."'".$title."'";
 
     $result = $mysqli->query($query);
 
