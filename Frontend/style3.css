@@ -29,6 +29,8 @@ p{
     font-size: 25px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-align: center;
+    border: 10px solid black;
+    padding: 20px;
 }
 
 h1, h2{

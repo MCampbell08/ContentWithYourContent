@@ -29,6 +29,8 @@ p{
     font-size: 25px;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
+    border: 10px solid #c9bbbb;
+    padding: 20px;
 }
 
 h1, h2{
