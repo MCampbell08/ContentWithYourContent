@@ -2,6 +2,8 @@
 	header("Access-Control-Allow-Origin: *");
 
     include 'dbconfig.php';
+
+    session_start(); // session is still live with all info
     
     $title;
     
@@ -9,7 +11,7 @@
 		$title = filter_input(INPUT_GET, 'title', FILTER_SANITIZE_URL);
 	}
 
-    $query = "select * from pages where title="."'".$title."'";
+    $query = "select * from pages";
 
     $result = $mysqli->query($query);
 
@@ -19,18 +21,17 @@
 
     if( $num_results > 0){ 
         while( $row = $result->fetch_assoc() ){
-
-            $json_array[] = $row;
-            
+            if( $title == $row['title'] ) {
+                $json_array[] = $row;
+            }
         }
     }
-
     //disconnect from database
 
     $result->free();
     $mysqli->close();
     
     echo json_encode(array($json_array));
-?>  
+    ?>  
 
 

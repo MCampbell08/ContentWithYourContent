@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,24 @@
     <title>About Us</title>
     <script src="switchstyle.js"></script>
     <script src="script.js"></script>
-    <script>loadAboutData("about"); </script>
+    <script>loadAboutData("about.html");</script>
 </head>
+
 <body>
     <nav>
-            <ul>
-                <li><a href="../frontend/"><button>Home</button></a></li>
-                <li><a href="../frontend/contact"><button>Contact</button></a></li>
-                <li><a href="../frontend/about"><button>About</button></a></li>
-                <li><a href="../frontend/email"><button>Email</button></a></li>
-                <li><a href="../frontend/history"><button>History</button></a></li>
-                <li><a href="../frontend/mission"><button>Mission</button></a></li>
-                <li><a href="../frontend/locations"><button>Locations</button></a></li>
-            </ul>
+        <ul>
+            <li><a href="../frontend/"><button>Home</button></a></li>
+            <li><a href="../frontend/contact"><button>Contact</button></a></li>
+            <li><a href="../frontend/about"><button>About</button></a></li>
+            <li><a href="../frontend/email"><button>Email</button></a></li>
+            <li><a href="../frontend/history"><button>History</button></a></li>
+            <li><a href="../frontend/mission"><button>Mission</button></a></li>
+            <li><a href="../frontend/locations"><button>Locations</button></a></li>
+        </ul>
+		<button style="visibility: hidden" id="loginButton" onclick="location.href = 'login'">Login</button>
+		<button style="visibility: hidden" id="logoutButton" >Logout</button>
     </nav>
     <h1>About Us</h1>
 </body>
+
 </html>

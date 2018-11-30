@@ -3,7 +3,7 @@ var map = {};
 onkeydown = onkeyup = function(e){
     e = e || event;
     map[e.keyCode] = e.type == 'keydown';
-    console.log(map);
+    // console.log(map);
     if(map[16] && map[18] && map[67]){
 
         if(style == 3){
