@@ -1,12 +1,14 @@
 var data;
 var request = new XMLHttpRequest();
 
-function deleteSubPage(page) {
-    //admin only
+function deletePage() {
+    var page = document.getElementById("pageID").innerText;
+    
 }
 
-function addSubPage(page) {
-    //admin only
+function addPage() {
+    var page = document.getElementById("pageID").innerText;
+    
 }
 
 function checkSession(){
