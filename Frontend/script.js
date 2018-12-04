@@ -33,6 +33,13 @@ function grabPage(page){
     return child;
 }
 
+function updatePageContent(title, content) {
+    request.open('UPDATE', 'http://localhost/contentwithyourcontent/backend/add_page.php?title=' + title);
+    request.onload = loadUpdatePageContentComplete;
+    var jsonObj = { "content": content.innerHTML };
+    request.send(JSON.stringify(jsonObj));
+}
+
 function unhidePage(title) {
     request.open('UPDATE', 'http://localhost/contentwithyourcontent/backend/add_page.php?title=' + title);
     request.onload = null;
@@ -118,14 +125,15 @@ function loadUpdatedPage(evt) {
 function loadShownPages(evt) {
     data = JSON.parse(request.responseText);
     var pages = document.getElementsByTagName('a');
+    var parent, row;
 
-    title = document.getElementById(data[0][0]["title"].replace('.html', ''));
     for(var i = 0; i < pages.length; i++) {
         for(var j = 0; j < data[0].length; j++) {
-            if(data[0][j]["title"].replace('.html','') === pages[i].id) {
-                var x = document.getElementById(pages[i].id).parentNode;
-                console.log(x)
-                document.getElementById(pages[i].id).parentNode.style["display"] = (data[0][j]["shown"] === 1) ? "inline" : "none";
+            row = data[0][j];
+            if(row["title"].replace('.html','') === pages[i].id) {
+                parent = document.getElementById(pages[i].id).parentNode;
+                console.log(row["shown"]);
+                parent.style["display"] = (row["shown"] === "1") ? "inline": "none";
             }
         }
     }
@@ -133,7 +141,6 @@ function loadShownPages(evt) {
 
 function loadEndSessionComplete(evt) {
     data = JSON.parse(request.responseText);
-    console.log(data);
     document.getElementById("logoutButton").style.visibility = "hidden";
     document.getElementById("loginButton").style.visibility = "visible";
 }
@@ -141,13 +148,15 @@ function loadEndSessionComplete(evt) {
 function loadSessionComplete(evt) {
     data = JSON.parse(request.responseText);
     if(data.length > 0) {
+        document.getElementById("loginButton").style.visibility = "hidden";
+        document.getElementById("logoutButton").style.visibility = "visible";
+        document.getElementById("logoutButton").onclick = endSession;
+    }
+    else {
         document.getElementById("loginButton").style.visibility = "visible";
         document.getElementById("logoutButton").style.visibility = "hidden";
     }
-    else {
-        document.getElementById("loginButton").style.visibility = "hidden";
-        document.getElementById("logoutButton").style.visibility = "visible";
-    }
+    checkShownPages();
 }
 
 function loadComplete(evt) {
@@ -157,6 +166,9 @@ function loadComplete(evt) {
     var element = document.createElement('div');
 
     element.innerHTML = data[0][0].content;
+    element.id = "databaseContent";
+    element.contentEditable = true;
+    element.addEventListener("focusout", contentEditableListener);
     body.appendChild(element);
 
     checkSession();
@@ -164,5 +176,18 @@ function loadComplete(evt) {
 
 function loadLoginComplete(evt) {
     data = JSON.parse(request.responseText);
-    window.location = 'index';    
+    window.location = 'index';
+}
+
+function loadUpdatePageContentComplete() {
+    data = JSON.parse(request.responseText);
+
+    console.log(data);
+}
+
+function contentEditableListener() {
+    var content = document.getElementById("databaseContent");
+    var title = window.location.pathname.split("/").pop();
+
+    updatePageContent(title, content);
 }

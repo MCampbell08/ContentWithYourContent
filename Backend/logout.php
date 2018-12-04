@@ -2,6 +2,6 @@
 	header("Access-Control-Allow-Origin: *");
 
     @session_destroy();
-    
-    echo json_encode(null);
+    $returnedInt = 1;
+    echo json_encode(array($returnedInt));
 ?>

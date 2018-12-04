@@ -10,7 +10,6 @@
 	<script src="switchstyle.js"></script>
     <script src="script.js"></script>
 	<script>loadMissionData("mission.html"); </script>
-	<script>checkShownPages();</script>
 </head>
 
 <body>
@@ -27,8 +26,8 @@
 					<li><a href="../frontend/mission" id="mission" style="display: show"><button>Mission</button></a></li>
 					<li><a href="../frontend/locations" id="locations" style="display: show"><button>Locations</button></a></li>
 				</ul>
-				<button style="visibility: hidden" id="loginButton" onclick="location.href = 'login'">Login</button>
-				<button style="visibility: hidden" id="logoutButton">Logout</button>
+				<button style="display: hidden" id="loginButton" onclick="location.href = 'login'">Login</button>
+				<button style="display: hidden" id="logoutButton" onclick="endSession();">Logout</button>
 			</nav>
 	<h1>Our Mission</h1>
 </body>
