@@ -53,4 +53,6 @@ CREATE TABLE IF NOT EXISTS sub_pages (
 -- (3, 'Theme_3', 'style3.css');
 
 -- INSERT INTO `users` (`id`, `user_name`, `pass`, `role`) VALUES
--- (1, 'admin', 'admin', 'admin');
+-- (1, 'admin', 'admin', 'admin'),
+-- (2, 'user', 'pass', 'user'),
+-- (3, 'editor', 'pass', 'content_editor');

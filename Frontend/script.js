@@ -1,4 +1,5 @@
 var data;
+var userData;
 var request = new XMLHttpRequest();
 
 function deletePage() {
@@ -25,21 +26,19 @@ function grabPage(page){
     var nav = document.getElementsByTagName("ul");
     var child = null;
 
-    console.log(nav[0])
-
     for(var i = 0; i < nav[0].children.length; i++){
         if(nav[0].children[i].firstChild.id === page) {
             child = nav[0].children[i].firstChild;
         }
     }
+
     return child;
 }
 
 function updatePageContent(title, content) {
-    request.open('UPDATE', 'http://localhost/contentwithyourcontent/backend/add_page.php?title=' + title);
+    request.open('UPDATE', 'http://localhost/contentwithyourcontent/backend/add_page.php?title=' + title + '&content=' + encodeURIComponent(content.innerHTML));
     request.onload = loadUpdatePageContentComplete;
-    var jsonObj = { "content": content.innerHTML };
-    request.send(JSON.stringify(jsonObj));
+    request.send();
 }
 
 function unhidePage(title) {
@@ -126,6 +125,7 @@ function loadUpdatedPage(evt) {
 
 function loadShownPages(evt) {
     data = JSON.parse(request.responseText);
+
     var pages = document.getElementsByTagName('a'); 
     var parent, row;
 
@@ -142,29 +142,47 @@ function loadShownPages(evt) {
 
 function loadEndSessionComplete(evt) {
     data = JSON.parse(request.responseText);
-    console.log(data)
+
     document.getElementById("logoutButton").style.visibility = "hidden";
     document.getElementById("loginButton").style.visibility = "visible";
+
+    
+    if(userData[2] === "admin") {
+        document.getElementById("addButton").style.visibility = "hidden";
+        document.getElementById("deleteButton").style.visibility = "hidden";
+        document.getElementById("pageID").style.visibility = "hidden";
+        userData = [];
+    }
 }
 
 function loadSessionComplete(evt) {
-    data = JSON.parse(request.responseText);
-    console.log(data);
-    if(data.length !== 0) {
+    userData = JSON.parse(request.responseText);
+
+    if(userData.length !== 0) {
         document.getElementById("loginButton").style.visibility = "hidden";
         document.getElementById("logoutButton").style.visibility = "visible";
         document.getElementById("logoutButton").onclick = endSession;
 
-        if(data[2] === "admin") {
+        if(userData[2] === "admin") {
             document.getElementById("addButton").style.visibility = "visible";
             document.getElementById("deleteButton").style.visibility = "visible";
             document.getElementById("pageID").style.visibility = "visible";
+        }
+
+        console.log(userData[2])
+
+        if(userData[2] === 'admin' || userData[2] === 'content_editor'){
+            var dom = document.getElementById("databaseContent");
+            
+            dom.addEventListener("focusout", contentEditableListener);
+            dom.contentEditable = true;
         }
     }
     else {
         document.getElementById("loginButton").style.visibility = "visible";
         document.getElementById("logoutButton").style.visibility = "hidden";
     }
+
     checkShownPages();
 }
 
@@ -176,9 +194,7 @@ function loadComplete(evt) {
 
     element.innerHTML = data[0][0].content;
     element.id = "databaseContent";
-    element.contentEditable = true;
-    element.addEventListener("focusout", contentEditableListener);
-    console.log(element)
+
     body.appendChild(element);
 
     checkSession();
@@ -186,13 +202,12 @@ function loadComplete(evt) {
 
 function loadLoginComplete(evt) {
     data = JSON.parse(request.responseText);
+
     window.location = 'index';
 }
 
 function loadUpdatePageContentComplete() {
     data = JSON.parse(request.responseText);
-
-    console.log(data);
 }
 
 function contentEditableListener() {

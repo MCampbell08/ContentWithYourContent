@@ -23,7 +23,7 @@
 
     if( $num_results > 0 ){ 
         while( $row = $result->fetch_assoc() ){
-            if( $user == $row['user_name'] && $pass == $row['pass'] ) {
+            if( $user == $row['user_name'] && password_verify($pass, $row['pass']) ) {
                 $json_array[] = $row;
                 $role = $row['role'];
 

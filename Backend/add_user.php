@@ -10,7 +10,7 @@
 		$user = filter_input(INPUT_GET, 'user', FILTER_SANITIZE_URL);
 	}
     if( isset($_GET['pass'])) {
-		$pass = filter_input(INPUT_GET, 'pass', FILTER_SANITIZE_URL);
+		$pass = password_hash(filter_input(INPUT_GET, 'pass', FILTER_SANITIZE_URL), PASSWORD_BCRYPT);
 	}
 
     $query = "insert into users (user_name, pass, role)
