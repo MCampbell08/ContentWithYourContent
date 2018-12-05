@@ -23,7 +23,7 @@
 
     $result = $mysqli->query($query);
 
-    disconnect from database
+    //disconnect from database
 
     $mysqli->close();
     
