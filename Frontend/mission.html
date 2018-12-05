@@ -8,27 +8,27 @@
 	<link href="style1.css" rel="stylesheet" />
 	<title>Our Mission</title>
 	<script src="switchstyle.js"></script>
-    <script src="script.js"></script>
+	<script src="script.js"></script>
 	<script>loadMissionData("mission.html"); </script>
 </head>
 
 <body>
-        <nav>
-				<input type="text" id="pageID" />
-				<button onclick="addPage()">Add</button>
-				<button onclick="deletePage()">Delete</button>
-				<ul id="nav">
-					<li><a href="../frontend/" id="home" style="display: show"><button>Home</button></a></li>
-					<li><a href="../frontend/contact" id="contact" style="display: show"><button>Contact</button></a></li>
-					<li><a href="../frontend/about" id="about" style="display: show"><button>About</button></a></li>
-					<li><a href="../frontend/email" id="email" style="display: show"><button>Email</button></a></li>
-					<li><a href="../frontend/history" id="history" style="display: show"><button>History</button></a></li>
-					<li><a href="../frontend/mission" id="mission" style="display: show"><button>Mission</button></a></li>
-					<li><a href="../frontend/locations" id="locations" style="display: show"><button>Locations</button></a></li>
-				</ul>
-				<button style="display: hidden" id="loginButton" onclick="location.href = 'login'">Login</button>
-				<button style="display: hidden" id="logoutButton" onclick="endSession();">Logout</button>
-			</nav>
+	<nav>
+		<input id="pageID" style="visibility: hidden" type="text" id="pageID" />
+		<button id="addButton" style="visibility: hidden" onclick="addPage()">Add</button>
+		<button id="deleteButton" style="visibility: hidden" onclick="deletePage()">Delete</button>
+		<ul id="nav">
+			<li><a href="../frontend/" id="home" style="display: show"><button>Home</button></a></li>
+			<li><a href="../frontend/contact" id="contact" style="display: show"><button>Contact</button></a></li>
+			<li><a href="../frontend/about" id="about" style="display: show"><button>About</button></a></li>
+			<li><a href="../frontend/email" id="email" style="display: show"><button>Email</button></a></li>
+			<li><a href="../frontend/history" id="history" style="display: show"><button>History</button></a></li>
+			<li><a href="../frontend/mission" id="mission" style="display: show"><button>Mission</button></a></li>
+			<li><a href="../frontend/locations" id="locations" style="display: show"><button>Locations</button></a></li>
+		</ul>
+		<button style="display: hidden" id="loginButton" onclick="location.href = 'login'">Login</button>
+		<button style="display: hidden" id="logoutButton" onclick="endSession();">Logout</button>
+	</nav>
 	<h1>Our Mission</h1>
 </body>
 

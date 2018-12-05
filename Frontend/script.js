@@ -22,12 +22,14 @@ function addPage() {
 }
 
 function grabPage(page){
-    var nav = document.getElementById("nav");
+    var nav = document.getElementsByTagName("ul");
     var child = null;
 
-    for(var i = 0; i < nav.children.length; i++){
-        if(nav.children[i].firstChild.id === page) {
-            child = nav.children[i].firstChild;
+    console.log(nav[0])
+
+    for(var i = 0; i < nav[0].children.length; i++){
+        if(nav[0].children[i].firstChild.id === page) {
+            child = nav[0].children[i].firstChild;
         }
     }
     return child;
@@ -124,7 +126,7 @@ function loadUpdatedPage(evt) {
 
 function loadShownPages(evt) {
     data = JSON.parse(request.responseText);
-    var pages = document.getElementsByTagName('a');
+    var pages = document.getElementsByTagName('a'); 
     var parent, row;
 
     for(var i = 0; i < pages.length; i++) {
@@ -132,7 +134,6 @@ function loadShownPages(evt) {
             row = data[0][j];
             if(row["title"].replace('.html','') === pages[i].id) {
                 parent = document.getElementById(pages[i].id).parentNode;
-                console.log(row["shown"]);
                 parent.style["display"] = (row["shown"] === "1") ? "inline": "none";
             }
         }
@@ -141,16 +142,24 @@ function loadShownPages(evt) {
 
 function loadEndSessionComplete(evt) {
     data = JSON.parse(request.responseText);
+    console.log(data)
     document.getElementById("logoutButton").style.visibility = "hidden";
     document.getElementById("loginButton").style.visibility = "visible";
 }
 
 function loadSessionComplete(evt) {
     data = JSON.parse(request.responseText);
-    if(data.length > 0) {
+    console.log(data);
+    if(data.length !== 0) {
         document.getElementById("loginButton").style.visibility = "hidden";
         document.getElementById("logoutButton").style.visibility = "visible";
         document.getElementById("logoutButton").onclick = endSession;
+
+        if(data[2] === "admin") {
+            document.getElementById("addButton").style.visibility = "visible";
+            document.getElementById("deleteButton").style.visibility = "visible";
+            document.getElementById("pageID").style.visibility = "visible";
+        }
     }
     else {
         document.getElementById("loginButton").style.visibility = "visible";
@@ -169,6 +178,7 @@ function loadComplete(evt) {
     element.id = "databaseContent";
     element.contentEditable = true;
     element.addEventListener("focusout", contentEditableListener);
+    console.log(element)
     body.appendChild(element);
 
     checkSession();

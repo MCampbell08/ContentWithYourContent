@@ -2,21 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="style1.css" rel="stylesheet" />
-    <title>About Us</title>
-    <script src="switchstyle.js"></script>
-    <script src="script.js"></script>
-    <script>loadAboutData("about.html");</script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="style1.css" rel="stylesheet" />
+        <title>About Us</title>
+        <script src="switchstyle.js"></script>
+        <script src="script.js"></script>
+        <script>loadAboutData("about.html");</script>
 </head>
 
 <body>
         <nav>
-                <input type="text" id="pageID" />
-                <button onclick="addPage()">Add</button>
-                <button onclick="deletePage()">Delete</button>
+                <input id="pageID" style="visibility: hidden" type="text" id="pageID" />
+                <button id="addButton" style="visibility: hidden" onclick="addPage()">Add</button>
+                <button id="deleteButton" style="visibility: hidden" onclick="deletePage()">Delete</button>
                 <ul>
                         <li><a href="../frontend/" id="home" style="display: show"><button>Home</button></a></li>
                         <li><a href="../frontend/contact" id="contact" style="display: show"><button>Contact</button></a></li>
@@ -27,9 +27,9 @@
                         <li><a href="../frontend/locations" id="locations" style="display: show"><button>Locations</button></a></li>
                 </ul>
                 <button style="visibility: hidden" id="loginButton" onclick="location.href = 'login'">Login</button>
-                <button style="visibility: hidden" id="logoutButton" >Logout</button>
-            </nav>
-    <h1>About Us</h1>
+                <button style="visibility: hidden" id="logoutButton">Logout</button>
+        </nav>
+        <h1>About Us</h1>
 </body>
 
 </html>
